@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Formulário demonstrativo de cadastro de apoiadores da Conexão Solidária.">
+  <title>Conexão Solidária | Cadastro</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo</a>
+
+  <header>
+    <p class="nome-ong">Conexão Solidária</p>
+
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li>
+          <a href="cadastro.html" aria-current="page">Cadastre-se</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <h1>Cadastro de apoiadores</h1>
+    <p>
+      Indique seu interesse em contribuir como doador,
+      voluntário ou nas duas modalidades.
+    </p>
+    <p id="aviso-cadastro">
+      Este formulário é uma demonstração acadêmica.
+      Utilize apenas dados fictícios. Os dados não serão
+      enviados nem armazenados. Todos os campos são obrigatórios.
+    </p>
+
+    <noscript>
+      <p>
+        Ative o JavaScript para testar o formulário.
+        O botão de demonstração permanece desativado sem ele.
+      </p>
+    </noscript>
+
+    <form id="form-cadastro" aria-describedby="aviso-cadastro">
+      <fieldset>
+        <legend>Dados pessoais</legend>
+
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            autocomplete="name"
+            minlength="3"
+            maxlength="120"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="cpf">CPF</label>
+          <p id="cpf-ajuda">Formato: 000.000.000-00.</p>
+          <input
+            type="text"
+            id="cpf"
+            name="cpf"
+            inputmode="numeric"
+            minlength="14"
+            maxlength="14"
+            pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}"
+            placeholder="000.000.000-00"
+            title="Informe o CPF no formato 000.000.000-00."
+            aria-describedby="cpf-ajuda"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="nascimento">Data de nascimento</label>
+          <input
+            type="date"
+            id="nascimento"
+            name="nascimento"
+            autocomplete="bday"
+            required
+          >
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Informações de contato</legend>
+
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            maxlength="254"
+            placeholder="nome@example.com"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="telefone">Telefone com DDD</label>
+          <p id="telefone-ajuda">
+            Formato: (11) 1234-5678 ou (11) 91234-5678.
+          </p>
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            autocomplete="tel"
+            minlength="14"
+            maxlength="15"
+            pattern="\([0-9]{2}\) [0-9]{4,5}\-[0-9]{4}"
+            placeholder="(11) 91234-5678"
+            title="Informe o DDD e o telefone no formato indicado."
+            aria-describedby="telefone-ajuda"
+            required
+          >
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Endereço</legend>
+
+        <div class="campo">
+          <label for="cep">CEP</label>
+          <p id="cep-ajuda">Formato: 00000-000.</p>
+          <input
+            type="text"
+            id="cep"
+            name="cep"
+            inputmode="numeric"
+            autocomplete="postal-code"
+            minlength="9"
+            maxlength="9"
+            pattern="[0-9]{5}\-[0-9]{3}"
+            placeholder="00000-000"
+            title="Informe o CEP no formato 00000-000."
+            aria-describedby="cep-ajuda"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="endereco">Endereço</label>
+          <p id="endereco-ajuda">
+            Informe logradouro, número e bairro.
+            Acrescente o complemento, se houver.
+          </p>
+          <input
+            type="text"
+            id="endereco"
+            name="endereco"
+            maxlength="200"
+            aria-describedby="endereco-ajuda"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="cidade">Cidade</label>
+          <input
+            type="text"
+            id="cidade"
+            name="cidade"
+            autocomplete="address-level2"
+            maxlength="100"
+            required
+          >
+        </div>
+
+        <div class="campo">
+          <label for="estado">Estado</label>
+          <select
+            id="estado"
+            name="estado"
+            autocomplete="address-level1"
+            required
+          >
+            <option value="">Selecione o estado</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Formas de participação</legend>
+
+        <div class="campo">
+          <label for="participacao">Como deseja colaborar?</label>
+          <select id="participacao" name="participacao" required>
+            <option value="">Selecione uma opção</option>
+            <option value="doador">Doador</option>
+            <option value="voluntario">Voluntário</option>
+            <option value="ambos">Doador e voluntário</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <button
+        class="botao"
+        type="button"
+        id="botao-cadastro"
+        disabled
+      >
+        Validar cadastro de demonstração
+      </button>
+
+      <p id="mensagem-cadastro" role="status"></p>
+    </form>
+  </main>
+
+  <footer>
+    <h2>Entre em contato</h2>
+
+    <address>
+      <p>
+        E-mail:
+        <a href="mailto:contato@conexaosolidaria.example">
+          contato@conexaosolidaria.example
+        </a>
+      </p>
+      <p>Telefone ilustrativo: (11) 0000-0000.</p>
+      <p>Endereço ilustrativo: Rua Exemplo, 100 — São Paulo, SP.</p>
+    </address>
+
+    <p>Projeto acadêmico com organização e contatos fictícios.</p>
+    <p>Desenvolvido por Gustavo Henrike.</p>
+  </footer>
+</body>
+</html>
