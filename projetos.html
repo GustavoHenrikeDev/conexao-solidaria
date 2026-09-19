@@ -7,6 +7,7 @@
     content="Conheça os projetos da Conexão Solidária e saiba como contribuir com doações ou trabalho voluntário.">
   <title>Conexão Solidária | Projetos</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -16,14 +17,50 @@
     <p class="nome-ong">Conexão Solidária</p>
 
     <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html">Início</a></li>
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-controls="menu-principal"
+    aria-expanded="false"
+    hidden
+  >
+    <span aria-hidden="true">☰</span>
+    Menu
+  </button>
+
+  <ul id="menu-principal">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="projetos.html" aria-current="page">Projetos</a></li>
+
+    <li class="menu-dropdown">
+      <button
+        class="submenu-toggle"
+        type="button"
+        aria-controls="submenu-ajudar"
+        aria-expanded="true"
+      >
+        Como ajudar
+        <span aria-hidden="true">▾</span>
+      </button>
+
+      <ul id="submenu-ajudar" class="submenu">
         <li>
-          <a href="projetos.html" aria-current="page">Projetos</a>
+          <a href="projetos.html#contribuicao">
+            Contribuição financeira
+          </a>
         </li>
-        <li><a href="cadastro.html">Cadastre-se</a></li>
+        <li>
+          <a href="projetos.html#voluntariado">
+            Trabalho voluntário
+          </a>
+        </li>
       </ul>
-    </nav>
+    </li>
+
+    <li><a href="cadastro.html">Cadastre-se</a></li>
+  </ul>
+</nav>
+
   </header>
 
   <main id="conteudo">
@@ -39,6 +76,7 @@
       <div class="lista-projetos">
         <article class="card">
           <h3>Mesa Solidária</h3>
+          <span class="badge">Segurança alimentar</span>
           <p>
             Organiza a arrecadação e a distribuição de alimentos
             para famílias em situação de vulnerabilidade social.
@@ -49,6 +87,7 @@
 
         <article class="card">
           <h3>Aprender Juntos</h3>
+          <span class="badge badge--educacao">Educação</span>
           <p>
             Promove atividades educativas e apoio aos estudos
             de crianças e adolescentes. O projeto busca ampliar
@@ -59,6 +98,7 @@
 
         <article class="card">
           <h3>Comunidade em Ação</h3>
+          <span class="badge badge--comunidade">Voluntariado</span>
           <p>
             Reúne moradores e voluntários em campanhas de
             arrecadação e ações comunitárias. Seu objetivo é

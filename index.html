@@ -7,6 +7,7 @@
     content="Conheça a Conexão Solidária e suas iniciativas de apoio à comunidade.">
   <title>Conexão Solidária | Início</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -16,12 +17,50 @@
     <p class="nome-ong">Conexão Solidária</p>
 
     <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html" aria-current="page">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html">Cadastre-se</a></li>
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-controls="menu-principal"
+    aria-expanded="false"
+    hidden
+  >
+    <span aria-hidden="true">☰</span>
+    Menu
+  </button>
+
+  <ul id="menu-principal">
+    <li><a href="index.html" aria-current="page">Início</a></li>
+    <li><a href="projetos.html">Projetos</a></li>
+
+    <li class="menu-dropdown">
+      <button
+        class="submenu-toggle"
+        type="button"
+        aria-controls="submenu-ajudar"
+        aria-expanded="true"
+      >
+        Como ajudar
+        <span aria-hidden="true">▾</span>
+      </button>
+
+      <ul id="submenu-ajudar" class="submenu">
+        <li>
+          <a href="projetos.html#contribuicao">
+            Contribuição financeira
+          </a>
+        </li>
+        <li>
+          <a href="projetos.html#voluntariado">
+            Trabalho voluntário
+          </a>
+        </li>
       </ul>
-    </nav>
+    </li>
+
+    <li><a href="cadastro.html">Cadastre-se</a></li>
+  </ul>
+</nav>
+
   </header>
 
   <main id="conteudo">

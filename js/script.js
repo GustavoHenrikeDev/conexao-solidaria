@@ -119,3 +119,185 @@ if (formulario) {
   botao.type = "submit";
   botao.disabled = false;
 }
+
+// Menu principal e submenu
+const navegacao = document.querySelector(
+  'nav[aria-label="Navegação principal"]'
+);
+
+if (navegacao) {
+  const botaoMenu = navegacao.querySelector(".menu-toggle");
+  const menuPrincipal = document.getElementById("menu-principal");
+  const botaoSubmenu = navegacao.querySelector(".submenu-toggle");
+  const submenu = document.getElementById("submenu-ajudar");
+  const telaGrande = window.matchMedia("(min-width: 768px)");
+
+  function definirSubmenu(aberto) {
+    submenu.hidden = !aberto;
+    botaoSubmenu.setAttribute("aria-expanded", String(aberto));
+  }
+
+  function definirMenu(aberto) {
+    menuPrincipal.hidden = !aberto;
+    botaoMenu.setAttribute("aria-expanded", String(aberto));
+
+    if (!aberto) {
+      definirSubmenu(false);
+    }
+  }
+
+  function ajustarNavegacao() {
+    const focoAnterior = document.activeElement;
+
+    definirSubmenu(false);
+    botaoMenu.hidden = telaGrande.matches;
+    definirMenu(telaGrande.matches);
+
+    // Evita manter o foco em elementos que ficaram ocultos.
+    if (telaGrande.matches && focoAnterior === botaoMenu) {
+      menuPrincipal.querySelector("a").focus();
+    } else if (
+      !telaGrande.matches &&
+      menuPrincipal.contains(focoAnterior)
+    ) {
+      botaoMenu.focus();
+    } else if (submenu.contains(focoAnterior)) {
+      botaoSubmenu.focus();
+    }
+  }
+
+  botaoMenu.addEventListener("click", () => {
+    definirMenu(menuPrincipal.hidden);
+  });
+
+  botaoSubmenu.addEventListener("click", () => {
+    definirSubmenu(submenu.hidden);
+  });
+
+  navegacao.addEventListener("keydown", (evento) => {
+    if (evento.key !== "Escape") return;
+
+    if (!submenu.hidden) {
+      definirSubmenu(false);
+      botaoSubmenu.focus();
+    } else if (!telaGrande.matches && !menuPrincipal.hidden) {
+      definirMenu(false);
+      botaoMenu.focus();
+    }
+  });
+
+  document.addEventListener("click", (evento) => {
+    if (!navegacao.contains(evento.target)) {
+      definirSubmenu(false);
+
+      if (!telaGrande.matches) {
+        definirMenu(false);
+      }
+    }
+  });
+
+  navegacao.addEventListener("click", (evento) => {
+    if (!evento.target.closest("a")) return;
+
+    definirSubmenu(false);
+
+    if (!telaGrande.matches) {
+      definirMenu(false);
+    }
+  });
+
+  telaGrande.addEventListener("change", ajustarNavegacao);
+  ajustarNavegacao();
+}
+
+// Feedback visual e textual dos campos
+const cadastroVisual = document.getElementById("form-cadastro");
+
+if (cadastroVisual) {
+  const campos = cadastroVisual.querySelectorAll(
+    ".campo input, .campo select"
+  );
+
+  function atualizarFeedback(campo) {
+    campo.classList.add("foi-interagido");
+
+    const idMensagem = `${campo.id}-feedback`;
+    let aviso = document.getElementById(idMensagem);
+
+    if (!aviso) {
+      aviso = document.createElement("p");
+      aviso.id = idMensagem;
+      aviso.className = "mensagem-campo";
+      campo.insertAdjacentElement("afterend", aviso);
+
+      // Preserva as instruções já associadas ao campo.
+      const descricoes = new Set(
+        (campo.getAttribute("aria-describedby") || "")
+          .split(/\s+/)
+          .filter(Boolean)
+      );
+
+      descricoes.add(idMensagem);
+      campo.setAttribute(
+        "aria-describedby",
+        [...descricoes].join(" ")
+      );
+    }
+
+    const valido = campo.validity.valid;
+
+    campo.setAttribute("aria-invalid", String(!valido));
+    aviso.dataset.estado = valido ? "sucesso" : "erro";
+
+    aviso.textContent = valido
+      ? "Preenchimento válido para as regras deste campo."
+      : `Revise este campo: ${campo.validationMessage}`;
+  }
+
+  campos.forEach((campo) => {
+    campo.addEventListener("blur", () => {
+      atualizarFeedback(campo);
+    });
+
+    campo.addEventListener("input", () => {
+      if (campo.classList.contains("foi-interagido")) {
+        atualizarFeedback(campo);
+      }
+    });
+
+    campo.addEventListener("change", () => {
+      atualizarFeedback(campo);
+    });
+  });
+
+  // O evento invalid é capturado também no envio nativo.
+  cadastroVisual.addEventListener(
+    "invalid",
+    (evento) => {
+      if (evento.target.matches(".campo input, .campo select")) {
+        atualizarFeedback(evento.target);
+      }
+    },
+    true
+  );
+
+  cadastroVisual.addEventListener("submit", () => {
+    campos.forEach(atualizarFeedback);
+  });
+}
+
+// Modal informativo do cadastro
+const abrirModal = document.getElementById("abrir-modal");
+const modalCadastro = document.getElementById("modal-cadastro");
+
+if (abrirModal && modalCadastro) {
+  abrirModal.addEventListener("click", () => {
+    if (!modalCadastro.open) {
+      modalCadastro.showModal();
+    }
+  });
+
+  modalCadastro.addEventListener("close", () => {
+    abrirModal.focus();
+  });
+}

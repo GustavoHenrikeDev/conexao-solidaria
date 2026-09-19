@@ -1,14 +1,39 @@
 /* Cores e medidas compartilhadas */
 :root {
+  /* Paleta de cores */
   --cor-primaria: #166534;
   --cor-primaria-escura: #14532d;
+  --cor-primaria-clara: #dcfce7;
+  --cor-destaque: #92400e;
   --cor-fundo: #f3f6f4;
   --cor-superficie: #ffffff;
   --cor-texto: #1f2937;
   --cor-secundaria: #4b5563;
   --cor-borda: #768579;
   --cor-foco: #1d4ed8;
+  --cor-erro: #b91c1c;
+
+  /* Família e escala tipográfica */
+  --fonte-principal: Arial, Helvetica, sans-serif;
+  --texto-pequeno: 0.875rem;
+  --texto-base: 1rem;
+  --titulo-pequeno: 1.25rem;
+  --titulo-medio: 1.5rem;
+  --titulo-grande: 2rem;
+  --altura-linha-texto: 1.6;
+  --altura-linha-titulo: 1.3;
+
+  /* Espaçamentos: múltiplos de 8 px na base padrão */
+  --espaco-1: 0.5rem;
+  --espaco-2: 1rem;
+  --espaco-3: 1.5rem;
+  --espaco-4: 2rem;
+  --espaco-5: 3rem;
+  --espaco-6: 4rem;
+
+  /* Acabamento dos componentes */
   --raio: 12px;
+  --sombra-suave: 0 3px 12px rgb(0 0 0 / 6%);
 }
 
 /* Configurações gerais */
@@ -349,4 +374,548 @@ footer p {
   fieldset {
     padding: 28px;
   }
+}
+
+/* Aplicação das variáveis do Design System */
+body {
+  font-family: var(--fonte-principal);
+  font-size: var(--texto-base);
+  line-height: var(--altura-linha-texto);
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--altura-linha-titulo);
+}
+
+h1 {
+  font-size: var(--titulo-grande);
+}
+
+h2,
+.nome-ong {
+  font-size: var(--titulo-medio);
+}
+
+h3,
+legend {
+  font-size: var(--titulo-pequeno);
+}
+
+.campo p {
+  font-size: var(--texto-pequeno);
+}
+
+main {
+  margin-block: var(--espaco-5);
+}
+
+section,
+fieldset {
+  padding: var(--espaco-3);
+}
+
+section {
+  margin-top: var(--espaco-3);
+  box-shadow: var(--sombra-suave);
+}
+
+fieldset {
+  margin-bottom: var(--espaco-3);
+}
+
+.lista-projetos,
+header {
+  gap: var(--espaco-3);
+}
+
+.card {
+  padding: var(--espaco-3);
+}
+
+.campo + .campo {
+  margin-top: var(--espaco-3);
+}
+
+nav ul {
+  gap: var(--espaco-1);
+}
+
+nav a,
+.botao {
+  padding: var(--espaco-2) var(--espaco-3);
+}
+
+input,
+select {
+  padding: var(--espaco-2);
+}
+
+#aviso-cadastro,
+#mensagem-cadastro:not(:empty) {
+  padding: var(--espaco-2);
+  background-color: var(--cor-primaria-clara);
+}
+
+/* Grid principal: 12 colunas */
+main {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--espaco-2);
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* Por padrão, cada bloco ocupa a largura completa */
+main > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-block: 0;
+}
+
+/* Formulário centralizado dentro da área disponível */
+main > form {
+  width: 100%;
+  max-width: 760px;
+  justify-self: center;
+}
+
+/* Grid interno dos projetos */
+.lista-projetos {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--espaco-2);
+}
+
+.lista-projetos > .card {
+  grid-column: span 12;
+}
+
+/* 1. Celulares maiores */
+@media (min-width: 480px) {
+  main {
+    gap: var(--espaco-3);
+  }
+}
+
+/* 2. Tablets pequenos */
+@media (min-width: 640px) {
+  main {
+    width: calc(100% - 3rem);
+  }
+
+  main > section,
+  main fieldset {
+    padding: var(--espaco-4);
+  }
+}
+
+/* 3. Tablets e telas intermediárias */
+@media (min-width: 768px) {
+  .lista-projetos > .card {
+    grid-column: span 6;
+  }
+
+  .lista-projetos > .card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 4. Notebooks e desktops */
+@media (min-width: 1024px) {
+  main > section[aria-labelledby="missao"],
+  main > section[aria-labelledby="valores"] {
+    grid-column: span 6;
+  }
+
+  .lista-projetos > .card {
+    grid-column: span 4;
+  }
+
+  .lista-projetos > .card:last-child {
+    grid-column: span 4;
+  }
+}
+
+/* 5. Telas amplas */
+@media (min-width: 1440px) {
+  main {
+    gap: var(--espaco-4);
+  }
+
+  .lista-projetos {
+    gap: var(--espaco-3);
+  }
+
+  main > section {
+    padding: var(--espaco-5);
+  }
+}
+
+/* Flexbox nos componentes internos */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--espaco-2);
+}
+
+nav {
+  min-width: 0;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--espaco-1);
+  margin: 0;
+}
+
+/* O gap controla o espaçamento entre os itens do menu */
+nav li + li {
+  margin-top: 0;
+}
+
+/* Grid posiciona os cartões; Flexbox organiza seu conteúdo */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--espaco-2);
+}
+
+.card > h3,
+.card > p {
+  margin: 0;
+}
+
+/* Reutiliza o breakpoint de 768px */
+@media (min-width: 768px) {
+  header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+  }
+}
+
+/* Navegação com submenu e botão mobile */
+.menu-toggle,
+.submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-1);
+  padding: var(--espaco-2);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font: inherit;
+  color: #ffffff;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle {
+  border-color: currentColor;
+}
+
+/* Respeita o estado oculto mesmo com display flex */
+.menu-toggle[hidden],
+#menu-principal[hidden],
+.submenu[hidden] {
+  display: none;
+}
+
+#menu-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--espaco-1);
+  margin-top: var(--espaco-2);
+}
+
+.menu-dropdown {
+  position: relative;
+}
+
+.submenu-toggle {
+  width: 100%;
+  text-align: left;
+}
+
+nav .submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--espaco-1);
+  margin: var(--espaco-1) 0 0;
+  padding: var(--espaco-1);
+  list-style: none;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-superficie);
+}
+
+nav .submenu a {
+  color: var(--cor-texto);
+}
+
+.menu-toggle,
+.submenu-toggle,
+nav a {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.menu-toggle:hover,
+.submenu-toggle:hover,
+.submenu-toggle[aria-expanded="true"] {
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+}
+
+header button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+nav .submenu a:focus-visible {
+  outline-color: var(--cor-foco);
+}
+
+/* Navegação horizontal em telas maiores */
+@media (min-width: 768px) {
+  #menu-principal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .submenu-toggle {
+    width: auto;
+  }
+
+  nav .submenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 20;
+    width: 260px;
+    margin-top: 0;
+    box-shadow: var(--sombra-suave);
+  }
+}
+
+/* Respeita a preferência por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle,
+  .submenu-toggle,
+  nav a {
+    transition: none;
+  }
+}
+
+/* Cartões: destaque visual sem indicar que são clicáveis */
+.card {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--cor-primaria);
+  box-shadow: var(--sombra-suave);
+}
+
+/* Estados dos botões */
+.botao,
+.menu-toggle,
+.submenu-toggle {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.botao:not(:disabled):hover {
+  background-color: var(--cor-primaria-escura);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
+}
+
+.botao:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 4px;
+}
+
+.menu-toggle:focus-visible,
+.submenu-toggle:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.botao:not(:disabled):active {
+  background-color: var(--cor-primaria-escura);
+  box-shadow: inset 0 2px 5px rgb(0 0 0 / 30%);
+}
+
+.menu-toggle:not(:disabled):active,
+.submenu-toggle:not(:disabled):active {
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+  box-shadow: inset 0 2px 5px rgb(0 0 0 / 25%);
+}
+
+.botao:disabled,
+.menu-toggle:disabled,
+.submenu-toggle:disabled {
+  color: #ffffff;
+  background-color: var(--cor-secundaria);
+  opacity: 1;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+/* Feedback após interação ou tentativa de envio */
+.campo input,
+.campo select {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.campo .foi-interagido:valid {
+  border: 2px solid var(--cor-primaria);
+  background-color: #f0fdf4;
+}
+
+.campo .foi-interagido:invalid {
+  border: 2px solid var(--cor-erro);
+  background-color: #fef2f2;
+}
+
+.campo .mensagem-campo {
+  margin-top: var(--espaco-1);
+  font-size: var(--texto-pequeno);
+}
+
+.campo .mensagem-campo[data-estado="erro"] {
+  color: var(--cor-erro);
+}
+
+.campo .mensagem-campo[data-estado="sucesso"] {
+  color: var(--cor-primaria-escura);
+}
+
+/* Mantém o foco identificável mesmo em campos inválidos */
+.campo input:focus-visible,
+.campo select:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .botao,
+  .menu-toggle,
+  .submenu-toggle,
+  .campo input,
+  .campo select {
+    transition: none;
+  }
+}
+
+/* Etiquetas dos projetos */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  max-width: 100%;
+  padding: var(--espaco-1) var(--espaco-2);
+  border-radius: 999px;
+  font-size: var(--texto-pequeno);
+  font-weight: bold;
+  line-height: 1.4;
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+}
+
+.badge--educacao {
+  color: #1e3a8a;
+  background-color: #dbeafe;
+}
+
+.badge--comunidade {
+  color: var(--cor-destaque);
+  background-color: #fef3c7;
+}
+
+/* Alerta informativo existente */
+#aviso-cadastro {
+  padding: var(--espaco-2);
+  border: 1px solid var(--cor-primaria);
+  border-left-width: 5px;
+  border-radius: var(--raio);
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+}
+
+/* Alerta de sucesso existente */
+#mensagem-cadastro:not(:empty) {
+  padding: var(--espaco-3);
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+  font-weight: bold;
+}
+
+/* Botão para informações complementares */
+.botao--secundario {
+  justify-self: start;
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-superficie);
+  border-color: var(--cor-primaria);
+}
+
+.botao--secundario:not(:disabled):hover,
+.botao--secundario:not(:disabled):active {
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-primaria-clara);
+}
+
+/* Modal */
+.modal {
+  width: min(560px, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: var(--espaco-3);
+  overflow-y: auto;
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  color: var(--cor-texto);
+  background-color: var(--cor-superficie);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 25%);
+}
+
+.modal::backdrop {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal__acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin: var(--espaco-3) 0 0;
 }

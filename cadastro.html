@@ -17,14 +17,50 @@
     <p class="nome-ong">Conexão Solidária</p>
 
     <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-controls="menu-principal"
+    aria-expanded="false"
+    hidden
+  >
+    <span aria-hidden="true">☰</span>
+    Menu
+  </button>
+
+  <ul id="menu-principal">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="projetos.html">Projetos</a></li>
+
+    <li class="menu-dropdown">
+      <button
+        class="submenu-toggle"
+        type="button"
+        aria-controls="submenu-ajudar"
+        aria-expanded="true"
+      >
+        Como ajudar
+        <span aria-hidden="true">▾</span>
+      </button>
+
+      <ul id="submenu-ajudar" class="submenu">
         <li>
-          <a href="cadastro.html" aria-current="page">Cadastre-se</a>
+          <a href="projetos.html#contribuicao">
+            Contribuição financeira
+          </a>
+        </li>
+        <li>
+          <a href="projetos.html#voluntariado">
+            Trabalho voluntário
+          </a>
         </li>
       </ul>
-    </nav>
+    </li>
+
+    <li><a href="cadastro.html" aria-current="page">Cadastre-se</a></li>
+  </ul>
+</nav>
+
   </header>
 
   <main id="conteudo">
@@ -245,6 +281,16 @@
 
       <p id="mensagem-cadastro" role="status"></p>
     </form>
+
+    <button
+  class="botao botao--secundario"
+  type="button"
+  id="abrir-modal"
+  aria-haspopup="dialog"
+>
+  Como funciona este cadastro?
+</button>
+
   </main>
 
   <footer>
@@ -264,5 +310,32 @@
     <p>Projeto acadêmico com organização e contatos fictícios.</p>
     <p>Desenvolvido por Gustavo Henrike.</p>
   </footer>
+
+  <dialog
+  class="modal"
+  id="modal-cadastro"
+  aria-labelledby="modal-titulo"
+  aria-describedby="modal-descricao"
+>
+  <h2 id="modal-titulo">Sobre o cadastro demonstrativo</h2>
+
+  <p id="modal-descricao">
+    Este formulário faz parte de um projeto acadêmico da
+    Conexão Solidária, uma ONG fictícia.
+  </p>
+
+  <p>
+    Utilize dados fictícios para testar os campos e as validações.
+    Ao concluir, será exibida uma mensagem na página.
+    Nenhum dado será enviado ou armazenado.
+  </p>
+
+  <form method="dialog" class="modal__acoes">
+    <button class="botao" type="submit" autofocus>
+      Entendi, fechar
+    </button>
+  </form>
+</dialog>
+
 </body>
 </html>
